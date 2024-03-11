@@ -19,5 +19,8 @@ The idea would be that e.g both players has the same character that can switch b
 * The player characters only hava about four directional moves ⬆️⬇️⬅️➡️ and one or two punch moves like side punch 👊, jump punch, and subsequently forward or head block to block those moves ✋ 
 * The players can only change their type following a timer in the health UI. This will incentivize players to geuss what type the opposing player will choose to pick, as to create suspense and make a fun interesting fighting experience with fewer resources. 
 
+>[!IMPORTANT]
+>The game's themathics will take inspiration and be a soft parody of the Tekken games
+
 Further moves or interactions could then be added to make the game more dynamic and fun but the above will be the main idea for the game. 
 
