@@ -14,9 +14,10 @@ Inspired by the magic number three I decided that it was fitting to make a fight
 
 The idea would be that e.g both players has the same character that can switch between being rock, paper or scissors. The funny thing then is that the fighting mechanics will be 
 
-e.g rock can damage a rock player 
-* The player can change his player type to the opposing force to rock, paper which the rock can't block against and can't damage back 
-* The player characters only has about four moves which would be forward punch, jump punch, forward block and head block 
+* Both players start as rock.  🪨 vs 🪨 a fighting setting where they can both damage and block eachother
+* The player can change his player type to the opposing force to rock, paper which the rock can't block against and can't damage back 🪨 VS 🧻 = Rock can do damage and can't take damage
+* The player characters only hava about four directional moves ⬆️⬇️⬅️➡️ and one or two punch moves like side punch 👊, jump punch, and subsequently forward or head block to block those moves ✋ 
 * The players can only change their type following a timer in the health UI. This will incentivize players to geuss what type the opposing player will choose to pick, as to create suspense and make a fun interesting fighting experience with fewer resources. 
 
 Further moves or interactions could then be added to make the game more dynamic and fun but the above will be the main idea for the game. 
+
