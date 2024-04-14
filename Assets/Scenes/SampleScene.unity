@@ -224,8 +224,9 @@ GameObject:
   - component: {fileID: 252940761}
   - component: {fileID: 252940763}
   - component: {fileID: 252940764}
+  - component: {fileID: 252940765}
   m_Layer: 0
-  m_Name: Scissor Character
+  m_Name: Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,7 +293,7 @@ Transform:
   m_GameObject: {fileID: 252940760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.368152, y: -1.916705, z: 0.000061035156}
+  m_LocalPosition: {x: -5.95, y: -2, z: 0}
   m_LocalScale: {x: 1.0354, y: 1.0354, z: 1.0354}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,6 +314,7 @@ MonoBehaviour:
   animator: {fileID: 252940764}
   maxHealth: 100
   currentHealth: 0
+  movementSpeed: 0
   healthBar: {fileID: 724813182}
 --- !u!95 &252940764
 Animator:
@@ -335,6 +337,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &252940765
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252940760}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &260808772
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,8 +652,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 331.07373, y: 287.91125}
-  m_SizeDelta: {x: 548.8424, y: 61.9687}
+  m_AnchoredPosition: {x: 244, y: 185}
+  m_SizeDelta: {x: 382.3365, y: 43.7382}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724813181
 MonoBehaviour:
