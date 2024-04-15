@@ -132,8 +132,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
     private void HandleInput() 
     {
         if (Input.GetKeyDown(KeyCode.F))

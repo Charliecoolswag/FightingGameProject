@@ -23,8 +23,6 @@ public class Player2Temp : MonoBehaviour
 
     private Rigidbody2D myRigidbody;
 
-
-
     public Healthbar healthBar;
 
     private void Start()
