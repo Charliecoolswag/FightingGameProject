@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player2Temp : MonoBehaviour
 {
     // Start is called before the first frame update
     public Animator animator;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Rigidbody2D myRigidbody;
-  
+
 
 
     public Healthbar healthBar;
@@ -33,24 +33,24 @@ public class PlayerMovement : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 
-        myRigidbody= GetComponent<Rigidbody2D>();
-        animator=GetComponent<Animator>();
+        myRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-           // animator.SetTrigger("Punch");
+            // animator.SetTrigger("Punch");
             TakeDamage(5);
         }
 
         HandleInput();
         HandleAttacks();
         HandleBlocks();
-        
+
 
         /*
         if(transform.position.x <= -9) 
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
          transform.position = transform.position + horizontal * Time.deltaTime;
         */
-        
+
         float horizontal = Input.GetAxis("Horizontal");
 
         HandleMovement(horizontal);
@@ -82,13 +82,13 @@ public class PlayerMovement : MonoBehaviour
             theScale.x *= -1;
 
             transform.localScale = theScale;
-        } 
+        }
     }
-        private void HandleMovement(float horizontal)
+    private void HandleMovement(float horizontal)
     {
-        
+
         //  myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y); 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StraightPunch"))
+      /*  if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StraightPunch"))
         {
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
         }
@@ -97,19 +97,20 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = new Vector2(0, 0);
         }
 
-        animator.SetFloat("speed", Mathf.Abs(horizontal)); 
-
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
+      */
 
 
         if (struck && !this.animator.GetCurrentAnimatorStateInfo(0).IsName("Struck"))
         {
             animator.SetBool("struck", true);
             TakeDamage(5);
-        } else if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Struck"))
+        }
+        else if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("Struck"))
         {
             animator.SetBool("struck", false);
         }
-        
+
     }
 
 
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("punch");
         }
     }
-    
+
 
     private void HandleBlocks()
     {
@@ -134,25 +135,32 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    private void HandleInput() 
+    private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             punch = true;
-        } else {
+        }
+        else
+        {
             punch = false;
         }
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            block = true; 
-        }  else { 
-            block = false; }
+            block = true;
+        }
+        else
+        {
+            block = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             struck = true;
-        } else  {
+        }
+        else
+        {
             struck = false;
         }
 
@@ -162,9 +170,9 @@ public class PlayerMovement : MonoBehaviour
     private void ResetValues()
     {
         punch = false;
-        block= false;
-        win= false;
-        struck= false;
+        block = false;
+        win = false;
+        struck = false;
     }
 
 
@@ -176,3 +184,4 @@ public class PlayerMovement : MonoBehaviour
     }
 
 }
+
