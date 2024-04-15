@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement(float horizontal)
     {
-
+        /*
         //  myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y); 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Punch"))
         {
@@ -80,7 +80,8 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = new Vector2(0, 0);
         }
 
-        animator.SetFloat("speed", Mathf.Abs(horizontal));
+        animator.SetFloat("speed", Mathf.Abs(horizontal)); 
+        */
     }
 
 
@@ -109,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            // animator.SetTrigger("Punch");
             attack = true;
             
         } else {
