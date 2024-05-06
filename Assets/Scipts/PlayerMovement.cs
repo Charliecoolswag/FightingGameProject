@@ -18,11 +18,48 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float movementSpeed;
+
     private bool facingRight;
 
+    [SerializeField]
+    private Transform[] groundPoints;
+
+    [SerializeField]
+    private float groundRadius;
+
+
+    [SerializeField]
+    private LayerMask whatIsGround;
+
+    private bool isGrounded;
+
+    private bool jump;
+
+    [SerializeField]
+    private float jumpforce;
 
     private Rigidbody2D myRigidbody;
   
+
+    private bool IsGrounded()
+    {
+        if (myRigidbody.velocity.y <=0)
+        {
+            foreach (Transform point in groundPoints)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position,groundRadius,whatIsGround);
+                for (int i=0; i < colliders.Length; i++)
+                {
+                    if (colliders[i].gameObject != gameObject)
+                    {
+                        return true;
+                    }
+                }
+            }
+            
+        }
+        return false;
+    }
 
 
     public Healthbar healthBar;
@@ -41,33 +78,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-           // animator.SetTrigger("Punch");
-            TakeDamage(5);
-        }
 
         HandleInput();
         HandleAttacks();
         HandleBlocks();
         
-
-        /*
-        if(transform.position.x <= -9) 
-        {
-            transform.position = new Vector3(transform.position.x, -2, 0);
-        }
-       */
-        /*
-         animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
-
-         Vector3 horizontal = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
-
-         transform.position = transform.position + horizontal * Time.deltaTime;
-        */
-        
         float horizontal = Input.GetAxis("Horizontal");
 
+        isGrounded = IsGrounded();
         HandleMovement(horizontal);
         Flip(horizontal);
     }
@@ -84,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = theScale;
         } 
     }
+
+    // movement 
         private void HandleMovement(float horizontal)
     {
         
@@ -96,6 +116,13 @@ public class PlayerMovement : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(0, 0);
         }
+
+        if (isGrounded && jump)
+        {
+            isGrounded = false;
+            myRigidbody.AddForce(new Vector2(0, jumpforce));
+        }
+
 
         animator.SetFloat("speed", Mathf.Abs(horizontal)); 
 
@@ -134,6 +161,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInput() 
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jump = true; 
+        } else { 
+            jump = false; 
+        }
+
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             punch = true;
@@ -163,6 +198,7 @@ public class PlayerMovement : MonoBehaviour
         block= false;
         win= false;
         struck= false;
+        jump = false;
     }
 
 
