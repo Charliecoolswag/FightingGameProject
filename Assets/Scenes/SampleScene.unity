@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 828506885}
   m_Layer: 0
   m_Name: Player 2 Tester
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 883856609}
   - component: {fileID: 883856608}
   - component: {fileID: 883856607}
+  - component: {fileID: 883856611}
   - component: {fileID: 883856606}
   - component: {fileID: 883856605}
   - component: {fileID: 883856604}
@@ -1331,6 +1332,18 @@ Transform:
   - {fileID: 1950039524}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &883856611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883856603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9956a002aa3571448be79c11e33cb351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1166985674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,10 +1873,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2130575577}
   - component: {fileID: 2130575579}
+  - component: {fileID: 2130575580}
   - component: {fileID: 2130575578}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1877,7 +1891,7 @@ Transform:
   m_GameObject: {fileID: 2130575576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.97, y: 0.52, z: 0}
+  m_LocalPosition: {x: 2.88, y: 0.46, z: 0}
   m_LocalScale: {x: 3.225234, y: 2.6375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1980,6 +1994,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2130575580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130575576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283bb4e47530704db33eb8f83ce0c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  maxHealth: 100
+  currentHealth: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

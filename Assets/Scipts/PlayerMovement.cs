@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         HandleInput();
-        HandleAttacks();
+        //HandleAttacks();
         HandleBlocks();
         
         float horizontal = Input.GetAxis("Horizontal");
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-
+    /*
     private void HandleAttacks()
     {
         if (punch)
@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("punch");
         }
     }
-    
+    */
 
     private void HandleBlocks()
     {
