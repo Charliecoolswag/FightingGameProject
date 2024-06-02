@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement2 : MonoBehaviour
 {
     // Start is called before the first frame update
     public Animator animator;
@@ -45,16 +45,16 @@ public class PlayerMovement : MonoBehaviour
     private float jumpforce;
 
     private Rigidbody2D myRigidbody;
-  
+
 
     private bool IsGrounded()
     {
-        if (myRigidbody.velocity.y <=0)
+        if (myRigidbody.velocity.y <= 0)
         {
             foreach (Transform point in groundPoints)
             {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position,groundRadius,whatIsGround);
-                for (int i=0; i < colliders.Length; i++)
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
+                for (int i = 0; i < colliders.Length; i++)
                 {
                     if (colliders[i].gameObject != gameObject)
                     {
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
             }
-            
+
         }
         return false;
     }
@@ -76,8 +76,8 @@ public class PlayerMovement : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 
-        myRigidbody= GetComponent<Rigidbody2D>();
-        animator=GetComponent<Animator>();
+        myRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -89,12 +89,12 @@ public class PlayerMovement : MonoBehaviour
         //HandleAttacks();
         HandleBlocks();
         float horizontal = 0f;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.J))
         {
             horizontal = -1f;
-        } 
+        }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.L))
         {
             horizontal = 1f;
         }
@@ -103,10 +103,10 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement(horizontal);
         Flip(horizontal);
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             animator.SetBool("isAttacking", true);
-        } 
+        }
 
 
     }
@@ -116,11 +116,11 @@ public class PlayerMovement : MonoBehaviour
     public void attack()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
-        foreach(Collider2D enemyGameobject in enemy)
+        foreach (Collider2D enemyGameobject in enemy)
         {
             Debug.Log("Hit enemy");
             TakeDamage(5);
-            
+
         }
     }
 
@@ -145,18 +145,18 @@ public class PlayerMovement : MonoBehaviour
             facingRight = !facingRight;
             Vector3 theScale = transform.localScale;
 
-            theScale.x *= -1;
+            theScale.x *= 1;
 
             transform.localScale = theScale;
-        } 
+        }
     }
 
     // movement 
-        private void HandleMovement(float horizontal)
+    private void HandleMovement(float horizontal)
     {
-        
 
-   
+
+
         //  myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y); 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("isAttacking"))
         {
@@ -172,9 +172,9 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
             myRigidbody.AddForce(new Vector2(0, jumpforce));
         }
-        
 
-        animator.SetFloat("speed", Mathf.Abs(horizontal)); 
+
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
 
 
         /*
@@ -209,13 +209,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void HandleInput() 
+    private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            jump = true; 
-        } else { 
-            jump = false; 
+            jump = true;
+        }
+        else
+        {
+            jump = false;
         }
 
         /*
@@ -230,14 +232,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            block = true; 
-        }  else { 
-            block = false; }
+            block = true;
+        }
+        else
+        {
+            block = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             struck = true;
-        } else  {
+        }
+        else
+        {
             struck = false;
         }
 
@@ -247,9 +254,9 @@ public class PlayerMovement : MonoBehaviour
     private void ResetValues()
     {
         punch = false;
-        block= false;
-        win= false;
-        struck= false;
+        block = false;
+        win = false;
+        struck = false;
         jump = false;
     }
 
