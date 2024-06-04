@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public HealthbarP2 healthBarP2;
     public int P2MaxHealth = 100;
     public int P2CurrentHealth;
+
+
+
     private bool block;
     private bool win;
     private bool struck;
@@ -67,11 +70,14 @@ public class PlayerMovement : MonoBehaviour
 
 
         facingRight = true;
+        P1CurrentHealth = P1MaxHealth;
         P2CurrentHealth = P2MaxHealth;
         healthBarP2.SetMaxHealth(P2MaxHealth);
-       
+        
+        
 
-        myRigidbody= GetComponent<Rigidbody2D>();
+
+        myRigidbody = GetComponent<Rigidbody2D>();
         animator=GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
     }
@@ -136,8 +142,6 @@ public class PlayerMovement : MonoBehaviour
         Flip(horizontal);
 
 
-        
-
         if (attack)
         {
             animator.SetBool("isAttacking", true);
@@ -155,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
         foreach(Collider2D enemyGameobject in P2Damage)
         {
             Debug.Log("Hit enemy");
-            TakeDamageP2(5);
+            TakeDamageP2(10);
             
         }
 
@@ -164,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider2D enemyGameobject in P1Damage)
         {
             Debug.Log("Hit enemy");
-            TakeDamageP1(5);
+            TakeDamageP1(10);
 
         }
 
