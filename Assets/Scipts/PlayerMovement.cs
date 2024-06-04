@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+ 
+   
+
     public Animator animator;
 
+    public HealthbarP1 healthbarP1;
+    public Healthbar healthBar;
     public int maxHealth = 100;
     public int currentHealth;
     private bool punch;
@@ -45,7 +52,25 @@ public class PlayerMovement : MonoBehaviour
     private float jumpforce;
 
     private Rigidbody2D myRigidbody;
-  
+
+
+    [SerializeField] PlayerInput playerInput;
+
+
+
+
+
+    private void Start()
+    {
+        facingRight = true;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+       
+
+        myRigidbody= GetComponent<Rigidbody2D>();
+        animator=GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+    }
 
     private bool IsGrounded()
     {
@@ -68,46 +93,50 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public Healthbar healthBar;
+    
 
-    private void Start()
-    {
-        facingRight = true;
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
 
-        myRigidbody= GetComponent<Rigidbody2D>();
-        animator=GetComponent<Animator>();
-
-    }
-
-    // Update is called once per frame
+    // Update is called once per frame ------------------------------------------------------------------------
     void Update()
     {
 
         HandleInput();
         //HandleAttacks();
         HandleBlocks();
-        float horizontal = 0f;
-        if (Input.GetKey(KeyCode.A))
-        {
-            horizontal = -1f;
-        } 
 
-        if (Input.GetKey(KeyCode.D))
+        
+
+
+
+       if (currentHealth <=0 && !win)
         {
-            horizontal = 1f;
+            win = true;
+            SetWin();
         }
+
+
+        float horizontal = playerInput.actions["Move"].ReadValue<Vector2>().x;
+        bool jump = playerInput.actions["Jump"].WasPerformedThisFrame();
+        bool attack = playerInput.actions["Attack"].WasPerformedThisFrame();
+
+
+        if (isGrounded && jump)
+        {
+            isGrounded = false;
+            myRigidbody.AddForce(new Vector2(0, jumpforce));
+        }
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
+
+
 
         isGrounded = IsGrounded();
         HandleMovement(horizontal);
         Flip(horizontal);
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (attack)
         {
             animator.SetBool("isAttacking", true);
-        } 
-
+        }
 
     }
 
@@ -167,14 +196,10 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = new Vector2(0, 0);
         }
 
-        if (isGrounded && jump)
-        {
-            isGrounded = false;
-            myRigidbody.AddForce(new Vector2(0, jumpforce));
-        }
+        
         
 
-        animator.SetFloat("speed", Mathf.Abs(horizontal)); 
+        
 
 
         /*
@@ -189,16 +214,7 @@ public class PlayerMovement : MonoBehaviour
         */
     }
 
-    /*
-    private void HandleAttacks()
-    {
-        if (punch)
-        {
-            animator.ResetTrigger("punch");
-            animator.SetTrigger("punch");
-        }
-    }
-    */
+
 
     private void HandleBlocks()
     {
@@ -211,6 +227,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInput() 
     {
+        /*
         if (Input.GetKeyDown(KeyCode.W))
         {
             jump = true; 
@@ -251,6 +268,7 @@ public class PlayerMovement : MonoBehaviour
         win= false;
         struck= false;
         jump = false;
+        
     }
 
 
@@ -260,5 +278,15 @@ public class PlayerMovement : MonoBehaviour
 
         healthBar.SetHealth(currentHealth);
     }
+
+
+
+    void SetWin()
+    {
+    
+        animator.SetBool("win", true);
+        Debug.Log("Win animation triggered");
+    }
+
 
 }
