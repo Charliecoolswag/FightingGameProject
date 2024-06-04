@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         facingRight = true;
+        P1CurrentHealth = P1MaxHealth;
         P2CurrentHealth = P2MaxHealth;
         healthBarP2.SetMaxHealth(P2MaxHealth);
        
@@ -155,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         foreach(Collider2D enemyGameobject in P2Damage)
         {
             Debug.Log("Hit enemy");
-            TakeDamageP2(5);
+            TakeDamageP2(10);
             
         }
 
@@ -164,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider2D enemyGameobject in P1Damage)
         {
             Debug.Log("Hit enemy");
-            TakeDamageP1(5);
+            TakeDamageP1(10);
 
         }
 
