@@ -1,23 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using TMPro;
 
-public class P2Movement : MonoBehaviour
+public class PlayerMovement2 : MonoBehaviour
 {
+    // Start is called before the first frame update
     public Animator animator;
 
-    public GameObject winTextObject;
-
-    public HealthbarP1 healthBarP1;
-    public int P1MaxHealth = 100;
-    public int P1CurrentHealth;
-
-    public HealthbarP2 healthBarP2;
-    public int P2MaxHealth = 100;
-    public int P2CurrentHealth;
+    public int maxHealth = 100;
+    public int currentHealth;
+    private bool punch;
     private bool block;
     private bool win;
     private bool struck;
@@ -55,27 +47,6 @@ public class P2Movement : MonoBehaviour
     private Rigidbody2D myRigidbody;
 
 
-    [SerializeField] PlayerInput playerInput;
-
-
-
-
-
-    private void Start()
-    {
-        winTextObject.SetActive(false);
-
-
-        facingRight = true;
-        P2CurrentHealth = P2MaxHealth;
-        healthBarP2.SetMaxHealth(P2MaxHealth);
-
-
-        myRigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        playerInput = GetComponent<PlayerInput>();
-    }
-
     private bool IsGrounded()
     {
         if (myRigidbody.velocity.y <= 0)
@@ -97,87 +68,61 @@ public class P2Movement : MonoBehaviour
     }
 
 
+    public Healthbar healthBar;
 
+    private void Start()
+    {
+        facingRight = true;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
 
+        myRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
-    // Update is called once per frame ------------------------------------------------------------------------
+    }
+
+    // Update is called once per frame
     void Update()
     {
 
         HandleInput();
         //HandleAttacks();
         HandleBlocks();
-
-
-        if (P2CurrentHealth <= 0 && !win)
+        float horizontal = 0f;
+        if (Input.GetKey(KeyCode.J))
         {
-            win = true;
-            SetWin();
-            winTextObject.SetActive(true);
+            horizontal = -1f;
         }
 
-
-        float horizontal = playerInput.actions["Move"].ReadValue<Vector2>().x;
-        bool jump = playerInput.actions["Jump"].WasPerformedThisFrame();
-        bool attack = playerInput.actions["Attack"].WasPerformedThisFrame();
-
-
-        if (isGrounded && jump)
+        if (Input.GetKey(KeyCode.L))
         {
-            isGrounded = false;
-            myRigidbody.AddForce(new Vector2(0, jumpforce));
+            horizontal = 1f;
         }
-        animator.SetFloat("speed", Mathf.Abs(horizontal));
-
-
 
         isGrounded = IsGrounded();
         HandleMovement(horizontal);
         Flip(horizontal);
 
-
-
-
-        if (attack)
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             animator.SetBool("isAttacking", true);
         }
 
+
     }
-
-
 
 
 
     public void attack()
     {
-        Collider2D[] P2Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
-        foreach (Collider2D enemyGameobject in P2Damage)
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
+        foreach (Collider2D enemyGameobject in enemy)
         {
             Debug.Log("Hit enemy");
-            TakeDamageP2(5);
+            TakeDamage(5);
 
         }
-
-
-        Collider2D[] P1Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
-        foreach (Collider2D enemyGameobject in P1Damage)
-        {
-            Debug.Log("Hit enemy");
-            TakeDamageP1(5);
-
-        }
-
-
     }
-
-    /*
-    public void isStruck()
-    {
-        animator.SetBool("struck", true);
-    }
-    */
-
 
     public void endAttack()
     {
@@ -200,7 +145,7 @@ public class P2Movement : MonoBehaviour
             facingRight = !facingRight;
             Vector3 theScale = transform.localScale;
 
-            theScale.x *= -1;
+            theScale.x *= 1;
 
             transform.localScale = theScale;
         }
@@ -222,10 +167,14 @@ public class P2Movement : MonoBehaviour
             myRigidbody.velocity = new Vector2(0, 0);
         }
 
+        if (isGrounded && jump)
+        {
+            isGrounded = false;
+            myRigidbody.AddForce(new Vector2(0, jumpforce));
+        }
 
 
-
-
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
 
 
         /*
@@ -240,7 +189,16 @@ public class P2Movement : MonoBehaviour
         */
     }
 
-
+    /*
+    private void HandleAttacks()
+    {
+        if (punch)
+        {
+            animator.ResetTrigger("punch");
+            animator.SetTrigger("punch");
+        }
+    }
+    */
 
     private void HandleBlocks()
     {
@@ -253,6 +211,24 @@ public class P2Movement : MonoBehaviour
 
     private void HandleInput()
     {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            jump = true;
+        }
+        else
+        {
+            jump = false;
+        }
+
+        /*
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            punch = true;
+        } else {
+            punch = false;
+        }
+        */
+
 
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -277,39 +253,19 @@ public class P2Movement : MonoBehaviour
 
     private void ResetValues()
     {
+        punch = false;
         block = false;
         win = false;
         struck = false;
         jump = false;
-
     }
 
-    void TakeDamageP1(int damage)
+
+    void TakeDamage(int damage)
     {
-        P1CurrentHealth -= damage;
+        currentHealth -= damage;
 
-        healthBarP1.SetHealth(P1CurrentHealth);
+        healthBar.SetHealth(currentHealth);
     }
-
-
-    void TakeDamageP2(int damage)
-    {
-        P2CurrentHealth -= damage;
-
-        healthBarP2.SetHealth(P2CurrentHealth);
-    }
-
-
-
-
-
-
-    void SetWin()
-    {
-        animator.SetBool("win", true);
-        Debug.Log("Win animation triggered in PlayerMovement");
-
-    }
-
 
 }
