@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject winTextObject;
 
-
-    // Healthbars - dependent on healthbar p2
     public HealthbarP1 healthBarP1;
     public int P1MaxHealth = 100;
     public int P1CurrentHealth;
@@ -62,6 +60,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] PlayerInput playerInput;
 
+
+
+
+
     private void Start()
     {
         winTextObject.SetActive(false);
@@ -70,9 +72,10 @@ public class PlayerMovement : MonoBehaviour
         facingRight = true;
         P1CurrentHealth = P1MaxHealth;
         P2CurrentHealth = P2MaxHealth;
-        healthBarP2.SetMaxHealth(P2MaxHealth); //sets health
+        healthBarP2.SetMaxHealth(P2MaxHealth);
         
-       
+        
+
 
         myRigidbody = GetComponent<Rigidbody2D>();
         animator=GetComponent<Animator>();
@@ -100,9 +103,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    
+
+
     // Update is called once per frame ------------------------------------------------------------------------
     void Update()
     {
+
+        HandleInput();
+        //HandleAttacks();
+        HandleBlocks();
+
 
        if (P2CurrentHealth <=0 && !win)
         {
@@ -138,6 +149,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+
+
+
     public void attack()
     {
         Collider2D[] P2Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
@@ -148,13 +163,16 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        // hvorfor skal det her være her
+
         Collider2D[] P1Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
         foreach (Collider2D enemyGameobject in P1Damage)
         {
             Debug.Log("Hit enemy");
             TakeDamageP1(10);
+
         }
+
+
     }
 
     /*
@@ -196,6 +214,8 @@ public class PlayerMovement : MonoBehaviour
         private void HandleMovement(float horizontal)
     {
         
+
+   
         //  myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y); 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("isAttacking"))
         {
@@ -205,6 +225,12 @@ public class PlayerMovement : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(0, 0);
         }
+
+        
+        
+
+        
+
 
         /*
         if (struck && !this.animator.GetCurrentAnimatorStateInfo(0).IsName("Struck"))
@@ -218,6 +244,44 @@ public class PlayerMovement : MonoBehaviour
         */
     }
 
+
+
+    private void HandleBlocks()
+    {
+        if (block)
+        {
+            animator.ResetTrigger("block");
+            animator.SetTrigger("block");
+        }
+    }
+
+    private void HandleInput() 
+    {
+      
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            block = true; 
+        }  else { 
+            block = false; }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            struck = true;
+        } else  {
+            struck = false;
+        }
+
+    }
+
+
+    private void ResetValues()
+    {
+        block= false;
+        win= false;
+        struck= false;
+        jump = false;
+        
+    }
 
     void TakeDamageP1(int damage)
     {
@@ -235,6 +299,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+
+    
+    
+
     void SetWin()
     {
         animator.SetBool("win", true);
@@ -242,12 +310,5 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    private void ResetValues()
-    {
-        block = false;
-        win = false;
-        struck = false;
-        jump = false;
-    }
 
 }
