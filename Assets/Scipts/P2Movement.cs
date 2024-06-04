@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
-public class PlayerMovement2 : MonoBehaviour
+public class P2Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Animator animator;
 
-    public int maxHealth = 100;
-    public int currentHealth;
-    private bool punch;
+    public GameObject winTextObject;
+
+    public HealthbarP1 healthBarP1;
+    public int P1MaxHealth = 100;
+    public int P1CurrentHealth;
+
+    public HealthbarP2 healthBarP2;
+    public int P2MaxHealth = 100;
+    public int P2CurrentHealth;
     private bool block;
     private bool win;
     private bool struck;
@@ -47,6 +55,27 @@ public class PlayerMovement2 : MonoBehaviour
     private Rigidbody2D myRigidbody;
 
 
+    [SerializeField] PlayerInput playerInput;
+
+
+
+
+
+    private void Start()
+    {
+        winTextObject.SetActive(false);
+
+
+        facingRight = true;
+        P2CurrentHealth = P2MaxHealth;
+        healthBarP2.SetMaxHealth(P2MaxHealth);
+
+
+        myRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+    }
+
     private bool IsGrounded()
     {
         if (myRigidbody.velocity.y <= 0)
@@ -68,61 +97,87 @@ public class PlayerMovement2 : MonoBehaviour
     }
 
 
-    public Healthbar healthBar;
 
-    private void Start()
-    {
-        facingRight = true;
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
 
-        myRigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
 
-    }
-
-    // Update is called once per frame
+    // Update is called once per frame ------------------------------------------------------------------------
     void Update()
     {
 
         HandleInput();
         //HandleAttacks();
         HandleBlocks();
-        float horizontal = 0f;
-        if (Input.GetKey(KeyCode.J))
+
+
+        if (P2CurrentHealth <= 0 && !win)
         {
-            horizontal = -1f;
+            win = true;
+            SetWin();
+            winTextObject.SetActive(true);
         }
 
-        if (Input.GetKey(KeyCode.L))
+
+        float horizontal = playerInput.actions["Move"].ReadValue<Vector2>().x;
+        bool jump = playerInput.actions["Jump"].WasPerformedThisFrame();
+        bool attack = playerInput.actions["Attack"].WasPerformedThisFrame();
+
+
+        if (isGrounded && jump)
         {
-            horizontal = 1f;
+            isGrounded = false;
+            myRigidbody.AddForce(new Vector2(0, jumpforce));
         }
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
+
+
 
         isGrounded = IsGrounded();
         HandleMovement(horizontal);
         Flip(horizontal);
 
-        if (Input.GetKeyDown(KeyCode.RightControl))
+
+
+
+        if (attack)
         {
             animator.SetBool("isAttacking", true);
         }
 
-
     }
+
+
 
 
 
     public void attack()
     {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
-        foreach (Collider2D enemyGameobject in enemy)
+        Collider2D[] P2Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
+        foreach (Collider2D enemyGameobject in P2Damage)
         {
             Debug.Log("Hit enemy");
-            TakeDamage(5);
+            TakeDamageP2(5);
 
         }
+
+
+        Collider2D[] P1Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
+        foreach (Collider2D enemyGameobject in P1Damage)
+        {
+            Debug.Log("Hit enemy");
+            TakeDamageP1(5);
+
+        }
+
+
     }
+
+    /*
+    public void isStruck()
+    {
+        animator.SetBool("struck", true);
+    }
+    */
+
 
     public void endAttack()
     {
@@ -145,7 +200,7 @@ public class PlayerMovement2 : MonoBehaviour
             facingRight = !facingRight;
             Vector3 theScale = transform.localScale;
 
-            theScale.x *= 1;
+            theScale.x *= -1;
 
             transform.localScale = theScale;
         }
@@ -167,14 +222,10 @@ public class PlayerMovement2 : MonoBehaviour
             myRigidbody.velocity = new Vector2(0, 0);
         }
 
-        if (isGrounded && jump)
-        {
-            isGrounded = false;
-            myRigidbody.AddForce(new Vector2(0, jumpforce));
-        }
 
 
-        animator.SetFloat("speed", Mathf.Abs(horizontal));
+
+
 
 
         /*
@@ -189,16 +240,7 @@ public class PlayerMovement2 : MonoBehaviour
         */
     }
 
-    /*
-    private void HandleAttacks()
-    {
-        if (punch)
-        {
-            animator.ResetTrigger("punch");
-            animator.SetTrigger("punch");
-        }
-    }
-    */
+
 
     private void HandleBlocks()
     {
@@ -211,24 +253,6 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            jump = true;
-        }
-        else
-        {
-            jump = false;
-        }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            punch = true;
-        } else {
-            punch = false;
-        }
-        */
-
 
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -253,19 +277,39 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void ResetValues()
     {
-        punch = false;
         block = false;
         win = false;
         struck = false;
         jump = false;
+
     }
 
-
-    void TakeDamage(int damage)
+    void TakeDamageP1(int damage)
     {
-        currentHealth -= damage;
+        P1CurrentHealth -= damage;
 
-        healthBar.SetHealth(currentHealth);
+        healthBarP1.SetHealth(P1CurrentHealth);
     }
+
+
+    void TakeDamageP2(int damage)
+    {
+        P2CurrentHealth -= damage;
+
+        healthBarP2.SetHealth(P2CurrentHealth);
+    }
+
+
+
+
+
+
+    void SetWin()
+    {
+        animator.SetBool("win", true);
+        Debug.Log("Win animation triggered in PlayerMovement");
+
+    }
+
 
 }
