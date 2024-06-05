@@ -71,6 +71,7 @@ Transform:
   - {fileID: 1958706027280089903}
   - {fileID: 7799194659033056171}
   - {fileID: 7524744038383866664}
+  - {fileID: 6263308450116709627}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7634352164754419013
@@ -149,7 +150,10 @@ MonoBehaviour:
   hitClip: {fileID: 8300000, guid: 08a1378868aed27488c7e61f70ab5901, type: 3}
   youWin: {fileID: 8300000, guid: 95ede014196a00b4dbc58963909932d8, type: 3}
   impactClip: {fileID: 8300000, guid: 1095c180fffbcf14e9c4cf4abe8ff131, type: 3}
+  kickClip: {fileID: 8300000, guid: 410154ae44b281046b66713231d7c618, type: 3}
+  scissorClip: {fileID: 8300000, guid: 00eb30d322bf23e46802491e8377df12, type: 3}
   attackPoint: {fileID: 3816510210830146982}
+  kickPoint: {fileID: 6857169008686450015}
   radius: 0.5
   enemies:
     serializedVersion: 2
@@ -513,6 +517,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.2, y: -1.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9031288702954325934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6857169008686450015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6263308450116709627}
+  m_Layer: 7
+  m_Name: KickPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6263308450116709627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857169008686450015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7, y: -1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

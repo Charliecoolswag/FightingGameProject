@@ -28,8 +28,11 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip hitClip;
     public AudioClip youWin;
     public AudioClip impactClip;
+    public AudioClip kickClip;
+    public AudioClip scissorClip;
 
     public GameObject attackPoint;
+    public GameObject kickPoint;
     public float radius;
     public LayerMask enemies;
 
@@ -119,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = playerInput.actions["Move"].ReadValue<Vector2>().x;
         bool jump = playerInput.actions["Jump"].WasPerformedThisFrame();
         bool attack = playerInput.actions["Attack"].WasPerformedThisFrame();
+        bool kick = playerInput.actions["Attack"].WasPerformedThisFrame();
 
         if (isGrounded && jump)
         {
@@ -131,11 +135,18 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement(horizontal);
         Flip(horizontal);
 
-        if (attack)
+      
+        if (attack && isGrounded)
         {
             animator.SetBool("isAttacking", true);
             source.PlayOneShot(hitClip);
         }
+        if (kick && !isGrounded)
+        {
+            animator.SetBool("isStruck", true);
+            source.PlayOneShot(kickClip);
+        }
+
     }
 
     private IEnumerator ReloadSceneAfterDelay(float delay)
@@ -165,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Hit enemy");
             TakeDamageP2(10);
             source.PlayOneShot(impactClip);
+            source.PlayOneShot(scissorClip);
         }
 
         Collider2D[] P1Damage = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemies);
@@ -178,6 +190,30 @@ public class PlayerMovement : MonoBehaviour
     public void endAttack()
     {
         animator.SetBool("isAttacking", false);
+    }
+
+    public void Kick()
+    {
+        Collider2D[] P2Damage = Physics2D.OverlapCircleAll(kickPoint.transform.position, radius, enemies);
+        foreach (Collider2D enemyGameobject in P2Damage)
+        {
+            Debug.Log("Kick enemy");
+            TakeDamageP2(15);
+            source.PlayOneShot(impactClip);
+            source.PlayOneShot(scissorClip);
+        }
+
+        Collider2D[] P1Damage = Physics2D.OverlapCircleAll(kickPoint.transform.position, radius, enemies);
+        foreach (Collider2D enemyGameobject in P1Damage)
+        {
+            Debug.Log("Kick enemy");
+            TakeDamageP1(15);
+        }
+    }
+
+    public void endKick()
+    {
+        animator.SetBool("isStruck", false);
     }
 
     private void OnDrawGizmosSelected()
@@ -206,6 +242,14 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("isAttacking"))
+        {
+            myRigidbody.velocity = new Vector2(0, 0);
+        }
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("isStruck"))
+        {
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("isStruck"))
         {
             myRigidbody.velocity = new Vector2(0, 0);
         }
