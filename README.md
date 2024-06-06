@@ -3,7 +3,7 @@
 
 Hello, this is my Github repository for the GMD course 2024. For student Charlie Phat Manh Ngo. Study number 295163, Global Business Engineering XA 2019
 
-To see my blog posts during the course, see the folder blogs above
+To see my full game video see link below and other links below for how I did it and tutorials I used!
 
 ### Youtube link:
 * https://www.youtube.com/watch?v=-2bkoOsNhAw
