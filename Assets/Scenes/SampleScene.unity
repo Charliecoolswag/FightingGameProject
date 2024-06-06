@@ -1207,7 +1207,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 0}
+  m_PlayerPrefab: {fileID: 4223537839431033983, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -2469,6 +2469,94 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
+      value: 09d56824-54de-44d8-a0a5-09baae0139e1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 91e8ce2e-234d-48b2-a444-e486ea60a265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
+      value: cc562626-4588-4545-bf16-114f5bd0b500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: 62254494-3a44-4738-877b-1262dc232b7b
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: ba3e5818-484a-49a6-afbb-d957a29dc632
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionId
+      value: 7d5199d9-0d8a-43d9-a703-6dcba79faea1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_ActionId
+      value: 3455896e-98da-4997-82f6-4e0be1d837f9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionId
+      value: 7169e665-3ccd-4d48-a38a-8d1ff76a8118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_ActionId
+      value: 8fa38d01-60c6-437b-a3fe-eee24bbc837d
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[24].m_ActionId
+      value: 537f3ca3-0dd8-484b-a4d5-a3219c1f44a1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
+      value: Player2/Move[/DualSenseGamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: Player2/Look[/DualSenseGamepadHID/rightStick,/Mouse/delta]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
+      value: Player2/Fire[/DualSenseGamepadHID/rightTrigger,/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: Player2/Jump[/Keyboard/space,/DualSenseGamepadHID/buttonSouth]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: Player2/Attack[/Keyboard/t,/DualSenseGamepadHID/buttonWest]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionName
+      value: Player3/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_ActionName
+      value: Player3/Look[/Mouse/delta]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionName
+      value: Player3/Fire[/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_ActionName
+      value: Player3/Jump[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[24].m_ActionName
+      value: Player3/Attack[/Keyboard/t]
+      objectReference: {fileID: 0}
     - target: {fileID: 9031288702954325934, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -2537,6 +2625,54 @@ PrefabInstance:
     - target: {fileID: 4223537839431033983, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionId
+      value: 7d5199d9-0d8a-43d9-a703-6dcba79faea1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_ActionId
+      value: 3455896e-98da-4997-82f6-4e0be1d837f9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionId
+      value: 7169e665-3ccd-4d48-a38a-8d1ff76a8118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_ActionId
+      value: 8fa38d01-60c6-437b-a3fe-eee24bbc837d
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[24].m_ActionId
+      value: 537f3ca3-0dd8-484b-a4d5-a3219c1f44a1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionName
+      value: Player3/Move[/DualSenseGamepadHID/leftStick,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_ActionName
+      value: Player3/Look[/DualSenseGamepadHID/rightStick,/Mouse/delta]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionName
+      value: Player3/Fire[/DualSenseGamepadHID/rightTrigger,/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_ActionName
+      value: Player3/Jump[/Keyboard/space,/DualSenseGamepadHID/buttonSouth]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994923211317258032, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[24].m_ActionName
+      value: Player3/Attack[/Keyboard/t,/DualSenseGamepadHID/buttonWest]
       objectReference: {fileID: 0}
     - target: {fileID: 9031288702954325934, guid: 371a5cf0ab1ade44fb2ab7394b9cd4c2, type: 3}
       propertyPath: m_LocalPosition.x
