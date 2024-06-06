@@ -21,7 +21,7 @@ To see my full game video see link below and other links below for how I did it 
 * https://github.com/Charliecoolswag/FightingGameProject/blob/main/Blogs/07-05-2024-Project-Jumping%20and%20hitting.md
   - third project work, 5th blog
 * https://github.com/Charliecoolswag/FightingGameProject/blob/main/Blogs/06-06-2024-Final-Blog-it-works-somewhat.md
-  - sixth and final blob
+  - sixth and final blog
 
 
 
